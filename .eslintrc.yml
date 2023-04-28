@@ -1,0 +1,57 @@
+env:
+  browser: true
+  es2021: true
+extends:
+  - airbnb-base
+  - plugin:@typescript-eslint/recommended
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+  project: './tsconfig.json'
+  tsconfigRootDir: './'
+settings:
+  import/parser:
+    '@typescript-eslint/parser': ['.ts', '.tsx']
+  import/resolver:
+    typescript: { alwaysTryTypes: true, project: './tsconfig.json' }
+plugins:
+  - '@typescript-eslint'
+  - 'import'
+rules:
+  {
+    no-unused-vars: error,
+    import/extensions: off,
+    import/prefer-default-export: off,
+    import/no-extraneous-dependencies: off,
+    comma-dangle: off,
+    arrow-parens: off,
+    object-curly-newline: off,
+    operator-linebreak: off,
+    implicit-arrow-linebreak: off,
+    newline-per-chained-call: off,
+    function-paren-newline: off,
+    import/order: [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'unknown'],
+          # works via minimatch lib https://www.npmjs.com/package/minimatch
+          #  some group paths detects by eslint-import-plugin automatically,
+          #  see https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md for more info
+          pathGroups:
+            [
+              { pattern: 'express', group: 'external', position: 'before' },
+              {
+                pattern: '*.{ts}',
+                group: 'sibling',
+                position: 'after',
+                patternOptions: { matchBase: true }
+              },
+              { pattern: '*.json', group: 'unknown' }
+            ],
+          pathGroupsExcludedImportTypes: ['builtin'],
+          alphabetize: { order: 'asc' },
+          'newlines-between': 'always'
+        }
+      ]
+  }

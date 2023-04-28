@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    command: yarn start
+    networks:
+      little-project-network:
+        ipv4_address: 10.5.0.2
+
+networks:
+  little-project-network:
+    ipam:
+      config:
+        - subnet: 10.5.0.0/24
+          gateway: 10.5.0.1
