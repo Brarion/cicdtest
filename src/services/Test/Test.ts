@@ -1,5 +1,5 @@
 const TestService = {
-  test: () => 'WOW'
+  test: () => 'testWOW'
 };
 
 export default Object.freeze(TestService);
