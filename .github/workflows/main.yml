@@ -42,5 +42,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            whoami
-            ls -al
+            echo "I am test12341"
+            echo "I am test"
+            echo "sha: test"
