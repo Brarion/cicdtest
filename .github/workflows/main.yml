@@ -42,13 +42,13 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "test" &
+            echo "test" |
             
-            echo "test1" &
+            echo "test1" |
             
-            cd cicdtest &
+            cd cicdtest |
             
-            dir &
+            dir |
             
             docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }} &
             
