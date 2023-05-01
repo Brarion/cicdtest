@@ -41,6 +41,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          command: |
-            cd testcicd;
-            dir;
+          script: |
+            cd testcicd
+            
+            dir
