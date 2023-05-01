@@ -34,10 +34,9 @@ jobs:
 #     needs: PushToDockerHub
     
     steps:
-      - name: Deploy
-      - run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}
-      - run: |
-          ${{ secrets.PASSWORD }}
-      - run: |
-          dir
+      - name: SSH
+        run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}
+      - name: SSH_PASSWORD
+        run: ${{ secrets.PASSWORD }}
+      - name: DIR
+        run: dir
