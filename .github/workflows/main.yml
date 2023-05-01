@@ -42,5 +42,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "test1"
-            echo "test2"
+            whoami
+            whoami
