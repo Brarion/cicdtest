@@ -42,8 +42,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd cicdtest |
-            docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }} |
-            dir |
-            docker pull testcicd:latest |
-            docker compose up -d
+            dir
