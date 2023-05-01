@@ -35,8 +35,11 @@ jobs:
     
     steps:
       - name: SSH
-        run: ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}
       - name: SSH_PASSWORD
-        run: ${{ secrets.PASSWORD }}
+        run: |
+          ${{ secrets.PASSWORD }}
       - name: DIR
-        run: dir
+        run: |
+          dir
