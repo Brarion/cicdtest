@@ -43,3 +43,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd ./cicdtest
+            
+            dir
