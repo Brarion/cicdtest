@@ -42,16 +42,18 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "test";
-            echo "test1";
-            cd cicdtest;
+            echo "test"
             
-            dir;
+            echo "test1"
             
-            docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }};
+            cd cicdtest
             
-            dir;
+            dir
             
-            docker pull testcicd:latest;
+            docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }}
+            
+            dir
+            
+            docker pull testcicd:latest
             
             docker compose up -d
