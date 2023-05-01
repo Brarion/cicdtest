@@ -35,24 +35,23 @@ jobs:
     
     steps:
       - name: SSH
-#         uses: appleboy/ssh-action@v0.1.3
-        run: |
-          echo "test";
-          echo "test1";
-#         with:
-#           host: ${{ secrets.HOST }}
-#           username: ${{ secrets.USERNAME }}
-#           password: ${{ secrets.PASSWORD }}
-#           port: ${{ secrets.PORT }}
-#           script: |
-#             cd cicdtest &
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo "test";
+            echo "test1";
+            cd cicdtest;
             
-#             dir &
+            dir;
             
-#             docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }} &
+            docker login -u=${{ secrets.DOCKER_USERNAME }} -p=${{ secrets.DOCKER_PASSWORD }};
             
-#             dir &
+            dir;
             
-#             docker pull testcicd:latest &
+            docker pull testcicd:latest;
             
-#             docker compose up -d
+            docker compose up -d
