@@ -34,12 +34,11 @@ jobs:
 #     needs: PushToDockerHub
     
     steps:
-      - name: SSH
-        run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }}
-      - name: SSH_PASSWORD
-        run: |
-          ${{ secrets.PASSWORD }}
-      - name: DIR
-        run: |
-          dir
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: dir
