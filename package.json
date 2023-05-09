@@ -41,7 +41,7 @@
     "docker:start": "yarn build && yarn start",
     "ci:start": "yarn prisma migrate deploy && yarn start",
     "test:integration": "docker-compose -f docker-compose.test.yml up -d && jest --maxWorkers=1",
-    "test:integration:ci": "docker-compose -f docker-compose.test.yml up -d && jest --maxWorkers=1"
+    "test:integration:ci": "docker-compose -f docker-compose.testci.yml up -d && jest --maxWorkers=1"
   },
   "prisma": {
     "schema": "./src/prisma/schema.prisma"
