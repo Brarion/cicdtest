@@ -7,38 +7,53 @@ on:
     branches: [ "main" ]
 
 jobs:
-#   PushToDockerHub:
-#     name: PushToDockerHub
-#     runs-on: ubuntu-latest
+  Test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Install deps
+        run: yarn install
+        
+      - name: Test
+        run: yarn test:integration:ci
+        
+  PushToDockerHub:
+    name: PushToDockerHub
+    runs-on: ubuntu-latest
+    needs: Test
 
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#       - name: Login to Docker Hub
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-#       - name: Build and push to Docker Hub
-#         uses: docker/build-push-action@v2
-#         with:
-#           context: .
-#           push: true
-#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/testcicd:latest
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/testcicd:latest
         
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
-#     needs: PushToDockerHub
+    needs: PushToDockerHub
     
     steps:
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
+      - name: SSH
+        uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: dir
+          script: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} && cd cicdtest && docker pull brarion/testcicd:latest && docker compose up -d
