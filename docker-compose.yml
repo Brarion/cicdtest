@@ -13,10 +13,10 @@ services:
       POSTGRES_DB: db
     networks:
       little-project-network:
-        ipv4_address: 10.5.0.3
+        ipv4_address: 10.5.0.2
 
-  app:
-    build: brarion/testcicd
+  app_1:
+    image: brarion/testcicd
     restart: always
     depends_on:
       - postgres
@@ -24,12 +24,58 @@ services:
       - ./.env
     environment:
       PRODUCT_DB: postgres://user:pass@10.5.0.3:5432/db
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     command: yarn ci:start
     networks:
       little-project-network:
-        ipv4_address: 10.5.0.2
+        ipv4_address: 10.5.0.3
+
+  app_2:
+    image: brarion/testcicd
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - ./.env
+    environment:
+      PRODUCT_DB: postgres://user:pass@10.5.0.3:5432/db
+    expose:
+      - 8000
+    command: yarn ci:start
+    networks:
+      little-project-network:
+        ipv4_address: 10.5.0.4
+
+  app_3:
+    image: brarion/testcicd
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - ./.env
+    environment:
+      PRODUCT_DB: postgres://user:pass@10.5.0.3:5432/db
+    expose:
+      - 8000
+    command: yarn ci:start
+    networks:
+      little-project-network:
+        ipv4_address: 10.5.0.5
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./DockerfileNginx
+    depends_on:
+      - app_1
+      - app_2
+      - app_3
+    ports:
+      - "8000:8000"
+    networks:
+      little-project-network:
+        ipv4_address: 10.5.0.6
 
 networks:
   little-project-network:

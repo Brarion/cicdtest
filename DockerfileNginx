@@ -1,0 +1,9 @@
+FROM nginx:alpine
+
+#COPY ./cicd.crt /etc/nginx/ssl/
+#COPY ./cicd.key /etc/nginx/ssl/
+#COPY ./ca.crt /etc/nginx/ssl/
+
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+#RUN mkdir -p /data/nginx/cache/backend
