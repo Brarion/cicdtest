@@ -1,3 +1,3 @@
-import { TestController } from './Test';
+import { ProductsController } from './Products';
 
-export { TestController };
+export { ProductsController };

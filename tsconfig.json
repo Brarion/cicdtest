@@ -47,12 +47,12 @@
       "@models/*": ["./src/models/*"],
       "@models": ["./src/models"],
       "@api/*": ["./src/api/*"],
-      "@api": ["./src/api"]
+      "@api": ["./src/api"],
       // "@validators/*": ["validators/*"],
       // "@validators": ["validators"],
       // "@requestLimit": ["requestLimit"],
-      // "@requestType": ["requestType"],
-      // "@requestType/*": ["requestType/*"],
+       "@requestType": ["./src/requestType"],
+       "@requestType/*": ["./src/requestType/*"],
       // "@defaultValues": ["defaultValues"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

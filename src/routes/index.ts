@@ -1,3 +1,3 @@
-import { TestRouter } from './Test';
+import { ProductsRouter } from './Products';
 
-export { TestRouter };
+export { ProductsRouter };
